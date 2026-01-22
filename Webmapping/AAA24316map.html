@@ -62,21 +62,6 @@
             // 下のようにも書ける
             L.marker([34.592331,135.505276]).bindPopup('杉本キャンパス').addTo(map);
 
-            map.attributionControl.addAttribution(
-            '<a href="https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-P29-v2_0.html">国土数値情報 - 学校データ</a>',
-            );
-            // GeoJSONレイヤーを作成
-            fetch('./P29-21_27.geojson') // 大阪府の学校データのGeoJSONを非同期読み込み
-                .then((res) => res.json())
-                .then((json) => {
-                // GeoJSONレイヤーを作成
-                const markers = L.geoJSON(json)
-                    .bindPopup((layer) => layer.feature.properties.P29_004)    // ポップアップで学校名を表示
-                    .addTo(map);
-                    // チェックボックス
-                    LayerControl.addOverlay(markers, "学校")  
-                });
-
             // ラインレイヤーを作成
             fetch("./line.geojson") // ルートデータの非同期読み込み
                 .then((response) => response.json())
